@@ -1,6 +1,6 @@
-package com.example.examplemod.datagen;
+package com.shield.vanillaplusmod.datagen;
 
-import com.example.examplemod.ExampleMod;
+import com.shield.vanillaplusmod.ShieldVanillaPlusMod;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-@EventBusSubscriber(modid = ExampleMod.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ShieldVanillaPlusMod.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {

@@ -1,7 +1,7 @@
-package com.example.examplemod;
+package com.shield.vanillaplusmod;
 
-import com.example.examplemod.blocks.ModBlocks;
-import com.example.examplemod.items.ModItems;
+import com.shield.vanillaplusmod.blocks.ModBlocks;
+import com.shield.vanillaplusmod.items.ModItems;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -19,12 +19,12 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
-@Mod(ExampleMod.MODID)
-public class ExampleMod {
-    public static final String MODID = "examplemod";
+@Mod(ShieldVanillaPlusMod.MODID)
+public class ShieldVanillaPlusMod {
+    public static final String MODID = "shieldvanillaplus";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public ExampleMod(IEventBus modEventBus, ModContainer modContainer) {
+    public ShieldVanillaPlusMod(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
 

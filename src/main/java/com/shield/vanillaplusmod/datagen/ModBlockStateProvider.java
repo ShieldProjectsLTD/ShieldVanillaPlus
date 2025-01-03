@@ -1,6 +1,6 @@
-package com.example.examplemod.datagen;
+package com.shield.vanillaplusmod.datagen;
 
-import com.example.examplemod.ExampleMod;
+import com.shield.vanillaplusmod.ShieldVanillaPlusMod;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, ExampleMod.MODID, existingFileHelper);
+        super(output, ShieldVanillaPlusMod.MODID, existingFileHelper);
     }
 
     @Override
@@ -23,10 +23,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
 
     private void blockItem(@NotNull DeferredBlock<?> deferredBlock) {
-        simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("shieldextracontent:block/" + deferredBlock.getId().getPath()));
+        simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile(ShieldVanillaPlusMod.MODID+":block/" + deferredBlock.getId().getPath()));
     }
 
     private void blockItem(@NotNull DeferredBlock<?> deferredBlock, String appendix) {
-        simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile("shieldextracontent:block/" + deferredBlock.getId().getPath() + appendix));
+        simpleBlockItem(deferredBlock.get(), new ModelFile.UncheckedModelFile(ShieldVanillaPlusMod.MODID+":block/" + deferredBlock.getId().getPath() + appendix));
     }
 }

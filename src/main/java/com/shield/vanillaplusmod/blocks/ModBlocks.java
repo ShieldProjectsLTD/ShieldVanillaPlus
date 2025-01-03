@@ -1,7 +1,7 @@
-package com.example.examplemod.blocks;
+package com.shield.vanillaplusmod.blocks;
 
-import com.example.examplemod.ExampleMod;
-import com.example.examplemod.items.ModItems;
+import com.shield.vanillaplusmod.ShieldVanillaPlusMod;
+import com.shield.vanillaplusmod.items.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
-            DeferredRegister.createBlocks(ExampleMod.MODID);
+            DeferredRegister.createBlocks(ShieldVanillaPlusMod.MODID);
 
     // vvv - Start add new blocks
 

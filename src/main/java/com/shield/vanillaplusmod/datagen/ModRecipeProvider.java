@@ -1,4 +1,4 @@
-package com.example.examplemod.datagen;
+package com.shield.vanillaplusmod.datagen;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
