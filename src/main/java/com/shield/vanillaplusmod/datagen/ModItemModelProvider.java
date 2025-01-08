@@ -1,6 +1,7 @@
 package com.shield.vanillaplusmod.datagen;
 
 import com.shield.vanillaplusmod.ShieldVanillaPlusMod;
+import com.shield.vanillaplusmod.items.ModItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -18,7 +19,14 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        handheldItem(ModItems.EXCALIBUR_AXE);
+        handheldItem(ModItems.SANDSTONE_PICKAXE);
+        handheldItem(ModItems.SANDSTONE_SHOVEL);
 
+        basicItem(ModItems.WITHER_BONE.get());
+        basicItem(ModItems.WITHER_BONE_MEAL.get());
+        basicItem(ModItems.SLEEPING_HEART_TREE.get());
+        basicItem(ModItems.AWAKENED_HEART_TREE.get());
     }
 
     public void buttonItem(DeferredBlock<?> block, DeferredBlock<Block> baseBlock) {

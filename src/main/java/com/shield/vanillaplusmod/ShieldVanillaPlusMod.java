@@ -1,6 +1,9 @@
 package com.shield.vanillaplusmod;
 
 import com.shield.vanillaplusmod.blocks.ModBlocks;
+import com.shield.vanillaplusmod.component.ModDataComponents;
+import com.shield.vanillaplusmod.enchantment.ModEnchantmentEffects;
+import com.shield.vanillaplusmod.items.ModCreativeModeTabs;
 import com.shield.vanillaplusmod.items.ModItems;
 import org.slf4j.Logger;
 
@@ -28,8 +31,13 @@ public class ShieldVanillaPlusMod {
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.register(this);
 
+        ModDataComponents.register(modEventBus);
+
+        ModCreativeModeTabs.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
+
+        ModEnchantmentEffects.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
@@ -47,8 +55,7 @@ public class ShieldVanillaPlusMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
         }
     }
 }
