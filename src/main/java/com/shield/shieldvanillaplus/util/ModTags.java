@@ -20,6 +20,9 @@ public class ModTags {
     public static final TagKey<Block> DESTROY_NATURE_BLOCKS_WITHER_BM = createTag("destroy_nature_blocks_wither_bm");
     public static final TagKey<Block> TRANSFORM_TO_DEAD_BUSH_WITHER_BM = createTag("transform_to_dead_bush_wither_bm");
 
+//    public static final TagKey<Block> TRANSFORM_TO_DEAD_BUSH_WITHER_BM = createTag("transform_to_dead_bush_wither_bm");
+//    public static final TagKey<Block> TRANSFORM_TO_DEAD_BUSH_WITHER_BM = createTag("transform_to_dead_bush_wither_bm");
+
     private static TagKey<Block> createTag(String name) {
       return BlockTags.create(ResourceLocation.fromNamespaceAndPath(ShieldVanillaPlusMod.MODID, name));
     }

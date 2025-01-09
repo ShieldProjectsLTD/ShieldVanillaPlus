@@ -3,7 +3,8 @@
   "package": "com.shield.shieldvanillaplus.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "TestMixin"
+    "Mixin_BoneMeal",
+    "Mixin_FurnaceTNTBoom"
   ],
   "client": [
 

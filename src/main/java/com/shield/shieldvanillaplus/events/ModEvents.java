@@ -3,7 +3,6 @@ package com.shield.shieldvanillaplus.events;
 import com.shield.shieldvanillaplus.ShieldVanillaPlusMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -21,27 +20,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.tick.LevelTickEvent;
-
-import java.util.Map;
 
 @EventBusSubscriber(modid = ShieldVanillaPlusMod.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class ModEvents {
 
-  private static final Map<Block, Block> STRIPPED_TO_ORIGINAL = Map.of(
-          net.minecraft.world.level.block.Blocks.STRIPPED_OAK_LOG, net.minecraft.world.level.block.Blocks.OAK_LOG,
-          net.minecraft.world.level.block.Blocks.STRIPPED_SPRUCE_LOG, net.minecraft.world.level.block.Blocks.SPRUCE_LOG,
-          net.minecraft.world.level.block.Blocks.STRIPPED_BIRCH_LOG, net.minecraft.world.level.block.Blocks.BIRCH_LOG,
-          net.minecraft.world.level.block.Blocks.STRIPPED_JUNGLE_LOG, net.minecraft.world.level.block.Blocks.JUNGLE_LOG,
-          net.minecraft.world.level.block.Blocks.STRIPPED_ACACIA_LOG, net.minecraft.world.level.block.Blocks.ACACIA_LOG,
-          net.minecraft.world.level.block.Blocks.STRIPPED_DARK_OAK_LOG, net.minecraft.world.level.block.Blocks.DARK_OAK_LOG,
-          net.minecraft.world.level.block.Blocks.STRIPPED_MANGROVE_LOG, net.minecraft.world.level.block.Blocks.MANGROVE_LOG,
-          net.minecraft.world.level.block.Blocks.STRIPPED_CRIMSON_STEM, net.minecraft.world.level.block.Blocks.CRIMSON_STEM,
-          net.minecraft.world.level.block.Blocks.STRIPPED_WARPED_STEM, net.minecraft.world.level.block.Blocks.WARPED_STEM
-  );
-
   @SubscribeEvent
-  public static void RepairAnvilMechanic(PlayerInteractEvent.RightClickBlock event) {
+  public static void RepairAnvil(PlayerInteractEvent.RightClickBlock event) {
     if(event.getLevel().isClientSide) {
       return;
     }
@@ -90,15 +74,6 @@ public class ModEvents {
   }
 
   @SubscribeEvent
-  public static void TNTFurnaceBoom(LevelTickEvent.Pre event) {
-    Level level = event.getLevel();
-    if (level.isClientSide) {
-      return;
-    }
-
-  }
-
-  @SubscribeEvent
   public static void OnPlantSeeds(PlayerInteractEvent.RightClickBlock event) {
     Level level = event.getLevel();
     if (level.isClientSide) {
@@ -133,42 +108,4 @@ public class ModEvents {
     }
   }
 
-  @SubscribeEvent
-  public static void RestorationWoodWithBoneMeal(PlayerInteractEvent.RightClickBlock event) {
-    Level level = event.getLevel();
-    if (level.isClientSide) {
-      return;
-    }
-
-    Player player = event.getEntity();
-    BlockPos pos = event.getPos();
-    BlockState state = level.getBlockState(pos);
-    InteractionHand hand = event.getHand();
-
-    if (player.getItemInHand(hand).is(Items.BONE_MEAL)) {
-      Block originalBlock = STRIPPED_TO_ORIGINAL.get(state.getBlock());
-
-      if (originalBlock != null) {
-        level.setBlock(pos, originalBlock.defaultBlockState(), 3);
-
-        if (!player.isCreative()) {
-          player.getItemInHand(hand).shrink(1);
-        }
-
-        if (level instanceof ServerLevel serverLevel) {
-          serverLevel.sendParticles(
-            ParticleTypes.HAPPY_VILLAGER,
-            pos.getX() + 0.5,
-            pos.getY() + 1.0,
-            pos.getZ() + 0.5,
-            5,
-            0.2, 0.2, 0.2, 0.05
-          );
-        }
-
-        event.setCanceled(true);
-        event.setCancellationResult(InteractionResult.SUCCESS);
-      }
-    }
-  }
 }
