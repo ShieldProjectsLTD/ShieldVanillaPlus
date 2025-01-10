@@ -1,14 +1,11 @@
 package com.shield.shieldvanillaplus.mixin;
 
+import com.shield.shieldvanillaplus.util.CustomExplosionDamageCalculator;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.ExplosionDamageCalculator;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -21,22 +18,26 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 import java.util.Objects;
 
+import net.minecraft.world.level.Explosion;
+
+
 @Mixin(AbstractFurnaceBlockEntity.class)
 public class Mixin_FurnaceTNTBoom {
 
   @Unique
   private static void shieldVanillaPlus$Explode(ServerLevel world, BlockPos pos) {
-    // Создаем источник урона для взрыва (например, от TNT)
-    DamageSource damageSource = Explosion.getDefaultDamageSource(world, null); // null — означает, что нет конкретного источника (например, может быть использован взрыв TNT)
-
-    // Создаем калькулятор урона для взрыва
-    ExplosionDamageCalculator damageCalculator = new ExplosionDamageCalculator();
-
-    // Создаем взрыв с дополнительными параметрами
-    Explosion explosion = world.explode(null, damageSource, damageCalculator, pos.getX(), pos.getY(), pos.getZ(), 6, false, Level.ExplosionInteraction.TNT);
-
-    // Запускаем обработку взрыва и нанесение урона
-    explosion.finalizeExplosion(true);  // Это гарантирует нанесение урона сущностям и обработку взрыва
+    DamageSource damageSource = Explosion.getDefaultDamageSource(world, null);
+    ExplosionDamageCalculator damageCalculator = new CustomExplosionDamageCalculator();
+    Explosion explosion = world.explode(
+            null,
+            damageSource,
+            damageCalculator,
+            pos.getX(), pos.getY() + 1.0f, pos.getZ(),
+            6.0F,
+            false,
+            Level.ExplosionInteraction.TNT
+    );
+    explosion.finalizeExplosion(true);
   }
 
 
