@@ -12,12 +12,12 @@ import java.util.Optional;
 
 public class CustomExplosionDamageCalculator extends ExplosionDamageCalculator {
   @Override
-  public @NotNull Optional<Float> getBlockExplosionResistance(Explosion explosion, BlockGetter reader, BlockPos pos, BlockState state, FluidState fluid) {
+  public @NotNull Optional<Float> getBlockExplosionResistance(@NotNull Explosion explosion, @NotNull BlockGetter reader, @NotNull BlockPos pos, @NotNull BlockState state, @NotNull FluidState fluid) {
     return Optional.of(0.0F);
   }
 
   @Override
-  public boolean shouldBlockExplode(Explosion explosion, BlockGetter reader, BlockPos pos, BlockState state, float power) {
+  public boolean shouldBlockExplode(@NotNull Explosion explosion, @NotNull BlockGetter reader, @NotNull BlockPos pos, @NotNull BlockState state, float power) {
     return true;
   }
 }
