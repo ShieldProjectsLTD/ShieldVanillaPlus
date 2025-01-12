@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "Mixin_BoneMeal",
-    "Mixin_FurnaceTNTBoom"
+    "Mixin_FurnaceTNTBoom",
+    "Mixin_EndPortalFrameBlock"
   ],
   "client": [
 
