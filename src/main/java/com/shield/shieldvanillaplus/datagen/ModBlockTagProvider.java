@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -32,6 +33,12 @@ public class ModBlockTagProvider extends BlockTagsProvider {
         tag(ModTags.Blocks.INCORRECT_FOR_EXCALIBUR_TOOl)
                 .addTag(BlockTags.INCORRECT_FOR_STONE_TOOL)
                 .remove(ModTags.Blocks.NEEDS_SANDSTONE_TOOL);
+
+        tag(BlockTags.NEEDS_DIAMOND_TOOL)
+            .add(Blocks.END_PORTAL_FRAME);
+
+        tag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .add(Blocks.END_PORTAL_FRAME);
 
         tag(ModTags.Blocks.TRANSFORMABLE_BLOCKS_WITHER_BM)
             .add(Blocks.GRASS_BLOCK)

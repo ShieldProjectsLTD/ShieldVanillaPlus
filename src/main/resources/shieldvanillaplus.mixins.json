@@ -5,7 +5,8 @@
   "mixins": [
     "Mixin_BoneMeal",
     "Mixin_FurnaceTNTBoom",
-    "Mixin_EndPortalFrameBlock"
+    "Mixin_EndPortalFrameBlock",
+    "BlockBehaviour_Properties"
   ],
   "client": [
 
