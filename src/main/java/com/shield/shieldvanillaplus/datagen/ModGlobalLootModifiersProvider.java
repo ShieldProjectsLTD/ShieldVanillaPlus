@@ -35,32 +35,23 @@ public class ModGlobalLootModifiersProvider extends GlobalLootModifierProvider {
   @Override
   protected void start() {
     add("wither_bone_from_wither_skeleton", new AddItemModifier(new LootItemCondition[] {
-            LootItemEntityPropertyCondition.hasProperties(
-                    LootContext.EntityTarget.THIS,
-                    EntityPredicate.Builder.entity().of(EntityType.WITHER_SKELETON)
-            ).build(),
-            LootItemRandomChanceCondition.randomChance(0.3f).build()
-    },
-            ModItems.WITHER_BONE.get()));
+        LootItemEntityPropertyCondition.hasProperties(
+                LootContext.EntityTarget.THIS,
+                EntityPredicate.Builder.entity().of(EntityType.WITHER_SKELETON)
+        ).build(),
+        LootItemRandomChanceCondition.randomChance(0.3f).build()
+      },
+      ModItems.WITHER_BONE.get())
+    );
 
     add("wither_bone_from_skeleton", new AddItemModifier(new LootItemCondition[]{
-            LootItemEntityPropertyCondition.hasProperties(
-                    LootContext.EntityTarget.THIS,
-                    EntityPredicate.Builder.entity().of(EntityType.SKELETON)
-            ).build(),
-            LootItemRandomChanceCondition.randomChance(0.035f).build()
-    },
-            ModItems.WITHER_BONE.get()));
-
-    add("end_portal_frame_modify",
-      new AddItemModifier( new LootItemCondition[] {
-              LootItemBlockStatePropertyCondition
-                      .hasBlockStateProperties(Blocks.END_PORTAL_FRAME)
-                      .build(),
-              LootItemRandomChanceCondition
-                      .randomChance(0.7f)
-                      .build()
-      }, Items.END_PORTAL_FRAME)
+        LootItemEntityPropertyCondition.hasProperties(
+                LootContext.EntityTarget.THIS,
+                EntityPredicate.Builder.entity().of(EntityType.SKELETON)
+        ).build(),
+        LootItemRandomChanceCondition.randomChance(0.035f).build()
+      },
+      ModItems.WITHER_BONE.get())
     );
   }
 }

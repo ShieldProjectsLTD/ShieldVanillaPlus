@@ -23,8 +23,9 @@ public abstract class Mixin_EndPortalFrameBlock extends Block {
   private static void modifyConstructorArgs(Args args) {
     BlockBehaviour.Properties properties = args.get(0);
     // Изменяем параметры блока
-    properties.destroyTime(5.0F);
+    properties.destroyTime(2200.0F);
     properties.explosionResistance(1200.0F);
+    properties.requiresCorrectToolForDrops();
     args.set(0, properties);
   }
 }

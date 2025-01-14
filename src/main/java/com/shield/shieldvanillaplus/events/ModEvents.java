@@ -1,6 +1,9 @@
 package com.shield.shieldvanillaplus.events;
 
+import com.shield.shieldvanillaplus.mechanics.BottleOxygen;
+import com.shield.shieldvanillaplus.mechanics.DismountEntity;
 import com.shield.shieldvanillaplus.ShieldVanillaPlusMod;
+import com.shield.shieldvanillaplus.mechanics.PlaceMushroomOnGrass;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -108,4 +111,24 @@ public class ModEvents {
     }
   }
 
+  @SubscribeEvent
+  public static void dismountEvent(PlayerInteractEvent.EntityInteract event) {
+    if (DismountEntity.onPlayerInteract(event.getEntity(), event.getLevel(), event.getTarget()).equals(InteractionResult.SUCCESS)) {
+      event.setCanceled(true);
+    }
+  }
+
+  @SubscribeEvent
+  public static void bottleOxygenEvent(PlayerInteractEvent.RightClickItem event) {
+    if (BottleOxygen.onBottleClick(event.getEntity(), event.getHand()).equals(InteractionResult.SUCCESS)) {
+      event.setCanceled(true);
+    }
+  }
+
+  @SubscribeEvent
+  public static void placeMushroomEvent(PlayerInteractEvent.RightClickBlock event) {
+    if (!PlaceMushroomOnGrass.placeMushroom(event.getLevel(), event.getEntity(), event.getHand(), event.getPos())) {
+      event.setCanceled(true);
+    }
+  }
 }
