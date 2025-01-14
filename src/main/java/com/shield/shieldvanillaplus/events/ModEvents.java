@@ -4,6 +4,7 @@ import com.shield.shieldvanillaplus.mechanics.BottleOxygen;
 import com.shield.shieldvanillaplus.mechanics.DismountEntity;
 import com.shield.shieldvanillaplus.ShieldVanillaPlusMod;
 import com.shield.shieldvanillaplus.mechanics.PlaceMushroomOnGrass;
+import com.shield.shieldvanillaplus.mechanics.SeedGrowthGrassBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -78,37 +79,38 @@ public class ModEvents {
 
   @SubscribeEvent
   public static void OnPlantSeeds(PlayerInteractEvent.RightClickBlock event) {
-    Level level = event.getLevel();
-    if (level.isClientSide) {
-      return;
-    }
-
-    Player player = event.getEntity();
-    InteractionHand hand = event.getHand();
-    BlockPos pos = event.getPos();
-    BlockState state = level.getBlockState(pos);
-
-    if (player.getItemInHand(hand).is(Items.WHEAT_SEEDS) && state.is(Blocks.DIRT)) {
-      level.setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
-
-      if (!player.isCreative()) {
-        player.getItemInHand(hand).shrink(1);
-      }
-
-      if (level instanceof ServerLevel serverLevel) {
-        serverLevel.sendParticles(
-                net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER,
-                pos.getX() + 0.5,
-                pos.getY() + 1.0,
-                pos.getZ() + 0.5,
-                5,
-                0.2, 0.2, 0.2, 0.05
-        );
-      }
-
-      event.setCanceled(true);
-      event.setCancellationResult(InteractionResult.SUCCESS);
-    }
+    SeedGrowthGrassBlock.growthGrass(event.getLevel(), event.getEntity(), event.getHand(), event.getPos());
+//    Level level = event.getLevel();
+//    if (level.isClientSide) {
+//      return;
+//    }
+//
+//    Player player = event.getEntity();
+//    InteractionHand hand = event.getHand();
+//    BlockPos pos = event.getPos();
+//    BlockState state = level.getBlockState(pos);
+//
+//    if (player.getItemInHand(hand).is(Items.WHEAT_SEEDS) && state.is(Blocks.DIRT)) {
+//      level.setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
+//
+//      if (!player.isCreative()) {
+//        player.getItemInHand(hand).shrink(1);
+//      }
+//
+//      if (level instanceof ServerLevel serverLevel) {
+//        serverLevel.sendParticles(
+//                net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER,
+//                pos.getX() + 0.5,
+//                pos.getY() + 1.0,
+//                pos.getZ() + 0.5,
+//                5,
+//                0.2, 0.2, 0.2, 0.05
+//        );
+//      }
+//
+//      event.setCanceled(true);
+//      event.setCancellationResult(InteractionResult.SUCCESS);
+//    }
   }
 
   @SubscribeEvent
@@ -126,7 +128,7 @@ public class ModEvents {
   }
 
 //  @SubscribeEvent
-//  public static void placeMushroomEvent(PlayerInteractEvent.RightClickBlock event) {
+//  public static void growthGrassEvent(PlayerInteractEvent.RightClickBlock event) {
 //    if (!PlaceMushroomOnGrass.placeMushroom(event.getLevel(), event.getEntity(), event.getHand(), event.getPos())) {
 //      event.setCanceled(true);
 //    }
