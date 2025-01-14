@@ -17,41 +17,41 @@ import net.minecraft.world.phys.BlockHitResult;
 import java.util.Random;
 
 public class PlaceMushroomOnGrass {
-  private static final Random random = new Random();
+//  private static final Random random = new Random();
 
-  public static boolean placeMushroom(Level world, Player player, InteractionHand hand, BlockPos pos) {
-    if (world.isClientSide) {
-      return true;
-    }
-
-    ItemStack itemStack = player.getItemInHand(hand);
-    Item item = itemStack.getItem();
-    Block block = Block.byItem(item);
-    if (!(block instanceof MushroomBlock)) {
-      return true;
-    }
-
-    BlockState state = world.getBlockState(pos);
-    if (!state.isSolidRender(world, pos)) {
-      return true;
-    }
-
-    BlockPos abovePos = pos.above();
-    Block aboveBlock = world.getBlockState(abovePos).getBlock();
-    if (aboveBlock.equals(Blocks.AIR)) {
-      BlockState placeState = block.defaultBlockState();
-      world.setBlock(abovePos, placeState, 3);
-
-      player.swing(hand);
-
-      if (!player.isCreative()) {
-        itemStack.shrink(1);
-      }
-
-      world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-      return false;
-    }
-
-    return true;
-  }
+//  public static boolean placeMushroom(Level world, Player player, InteractionHand hand, BlockPos pos) {
+//    if (world.isClientSide) {
+//      return true;
+//    }
+//
+//    ItemStack itemStack = player.getItemInHand(hand);
+//    Item item = itemStack.getItem();
+//    Block block = Block.byItem(item);
+//    if (!(block instanceof MushroomBlock)) {
+//      return true;
+//    }
+//
+//    BlockState state = world.getBlockState(pos);
+//    if (!state.isSolidRender(world, pos)) {
+//      return true;
+//    }
+//
+//    BlockPos abovePos = pos.above();
+//    Block aboveBlock = world.getBlockState(abovePos).getBlock();
+//    if (aboveBlock.equals(Blocks.AIR)) {
+//      BlockState placeState = block.defaultBlockState();
+//      world.setBlock(abovePos, placeState, 3);
+//
+//      player.swing(hand);
+//
+//      if (!player.isCreative()) {
+//        itemStack.shrink(1);
+//      }
+//
+//      world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.GRASS_PLACE, SoundSource.BLOCKS, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
+//      return false;
+//    }
+//
+//    return true;
+//  }
 }

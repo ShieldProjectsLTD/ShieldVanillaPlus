@@ -6,7 +6,8 @@
     "Mixin_BoneMeal",
     "Mixin_FurnaceTNTBoom",
     "Mixin_EndPortalFrameBlock",
-    "Mixin_EndPortalFrameLootTable"
+    "Mixin_EndPortalFrameLootTable",
+    "Mixin_MushroomBlock"
   ],
   "client": [
 

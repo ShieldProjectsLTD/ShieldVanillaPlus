@@ -125,10 +125,10 @@ public class ModEvents {
     }
   }
 
-  @SubscribeEvent
-  public static void placeMushroomEvent(PlayerInteractEvent.RightClickBlock event) {
-    if (!PlaceMushroomOnGrass.placeMushroom(event.getLevel(), event.getEntity(), event.getHand(), event.getPos())) {
-      event.setCanceled(true);
-    }
-  }
+//  @SubscribeEvent
+//  public static void placeMushroomEvent(PlayerInteractEvent.RightClickBlock event) {
+//    if (!PlaceMushroomOnGrass.placeMushroom(event.getLevel(), event.getEntity(), event.getHand(), event.getPos())) {
+//      event.setCanceled(true);
+//    }
+//  }
 }
