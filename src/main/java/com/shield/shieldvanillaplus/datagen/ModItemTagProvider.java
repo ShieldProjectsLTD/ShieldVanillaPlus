@@ -35,5 +35,20 @@ public class ModItemTagProvider extends ItemTagsProvider {
         tag(ModTags.Items.TNT_ITEMS)
             .add(Items.TNT)
             .add(Items.TNT_MINECART);
+
+        tag(ModTags.Items.LANTERNS)
+            .add(Items.LANTERN)
+            .add(Items.SOUL_LANTERN);
+
+        tag(ModTags.Items.PISTONS)
+            .add(Items.PISTON)
+            .add(Items.STICKY_PISTON);
+
+        tag(ModTags.Items.MINECARTS)
+            .add(Items.MINECART)
+            .add(Items.CHEST_MINECART)
+            .add(Items.HOPPER_MINECART)
+            .add(Items.FURNACE_MINECART)
+            .add(Items.COMMAND_BLOCK_MINECART);
     }
 }

@@ -27,6 +27,10 @@ public class ModTags {
 
   public static class Items {
     public static final TagKey<Item> TNT_ITEMS = createTag("tnt_items");
+    public static final TagKey<Item> LANTERNS = createTag("lanterns");
+    public static final TagKey<Item> PISTONS = createTag("pistons");
+    public static final TagKey<Item> MINECARTS = createTag("minecarts");
+
 
     private static TagKey<Item> createTag(String name) {
       return ItemTags.create(ResourceLocation.fromNamespaceAndPath(ShieldVanillaPlusMod.MODID, name));

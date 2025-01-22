@@ -1,56 +1,47 @@
 package com.shield.shieldvanillaplus.mechanics;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 
+
 public class SeedGrowthGrassBlock {
-  public static boolean growthGrass(Level world, Player player, InteractionHand hand, BlockPos pos) {
+  public static InteractionResult growthGrass(Level world, Player player, InteractionHand hand, BlockPos pos) {
     if (world.isClientSide) {
-      return true;
+      return InteractionResult.FAIL;
     }
 
-    ItemStack stack = player.getItemInHand(hand);
-    if (!stack.getItem().equals(Items.WHEAT_SEEDS)) {
-      return true;
-    }
+    BlockState state = world.getBlockState(pos);
 
-    Block block = world.getBlockState(pos).getBlock();
-    if (block.equals(Blocks.DIRT)) {
-      world.setBlockAndUpdate(pos, Blocks.GRASS_BLOCK.defaultBlockState());
-    }
-    else if (block.equals(Blocks.GRASS_BLOCK)) {
-      BlockPos up = pos.above();
-      if (world.getBlockState(up).getBlock().equals(Blocks.AIR)) {
-        world.setBlockAndUpdate(up, Blocks.SHORT_GRASS.defaultBlockState());
+    if (player.getItemInHand(hand).is(Items.WHEAT_SEEDS) && state.is(Blocks.DIRT)) {
+      world.setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
+
+      if (!player.isCreative()) {
+        player.getItemInHand(hand).shrink(1);
       }
-      else if (world.getBlockState(up).getBlock().equals(Blocks.SHORT_GRASS)) {
-        upgradeGrass(world, up);
-      }
-      else {
-        return true;
-      }
-    }
-    else if (block.equals(Blocks.SHORT_GRASS)) {
-      upgradeGrass(world, pos);
-    }
-    else {
-      return true;
-    }
 
-    if (!player.isCreative()) {
-      stack.shrink(1);
-    }
+      if (world instanceof ServerLevel serverLevel) {
+        serverLevel.sendParticles(
+                net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER,
+                pos.getX() + 0.5,
+                pos.getY() + 1.0,
+                pos.getZ() + 0.5,
+                5,
+                0.2, 0.2, 0.2, 0.05
+        );
+      }
 
-    return true;
+      return InteractionResult.SUCCESS;
+    }
+    return InteractionResult.PASS;
   }
 
   private static void upgradeGrass(Level world, BlockPos pos) {
